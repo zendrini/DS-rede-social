@@ -1,3 +1,84 @@
+## Você pode conhecer a biblioteca clicando no link abaixo ou adicionar esse trecho de código no seu index.html abaixo do seu arquivo CSS.   
+```xml
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js" charset="utf-8"></script>
+```
+
+### [Link da biblioteca Plotly ](https://plotly.com/javascript/)
+
+## Após adicionar a biblioteca de gráficos vamos capturar os dados de outra fonte externa então dentro da pasta já criada `graficos` crie mais um arquivo chamado: `quantidadeUsuarios.js`
+
+## Depois, no arquivo `index.html`, vamos adicionar dentro do `<body>` mais um `script:module`, referenciando nosso novo arquivo pelo caminho `graficos/quantidadeUsuarios.js`.
+```xml
+<script type="module" src="graficos/quantidadeUsuarios.js"></script>
+```
+
+## No arquivo `quantidadeUsuarios.js`, faremos o mesmo feita anteriormente no arquivo `informacoesGlobais.js`.
+```csharp
+async function quantidadeUsuarios() {
+  const url = 'https://raw.githubusercontent.com/guilhermeomrails/api/main/numero-usuarios.json'
+  const res = await fetch(url)
+  const dados = await res.json()
+}
+
+quantidadeUsuarios()
+```
+
+## Estruturando o gráfico
+
+É importante saber que tipo de gráfico queremos gerar. Inicialmente, vamos gerar um gráfico de barras, onde teremos uma barra para cada rede social, definida pela quantidade em cada uma delas.
+
+Primeiro vamos separar cada uma dessa informações dos dados entre chaves (  `keys`  ) e valores (  `values`  ).
+
+No arquivo  `quantidadeUsuarios.js`, dentro da função, depois de  `const dados`, vamos criar uma nova variável  `const nomeDasRedes`  que recebe  `Object.keys(dados)`. Ou seja, essa variável conterá apenas os nomes das redes, que são as chaves (  `keys`  ).
+
+Depois, vamos criar outra variável  `const quantidadeUsuarios`  que recebe  `Object.values(dados)`. Ou seja, nossa variável conterá apenas as quantidades de usuários de cada rede, que são nossos valores (  `values`  ).
+
+```javascript
+async function quantidadeUsuarios() {
+  const url = 'https://raw.githubusercontent.com/guilhermeomrails/api/main/numero-usuarios.json'
+  const res = await fetch(url)
+  const dados = await res.json()
+  const nomeDasRedes = Object.keys(dados)
+  const quantidadeUsuarios = Object.values(dados)
+
+}
+
+quantidadeUsuarios()
+```
+Agora, vamos criar a estrutura do gráfico.
+
+Teremos uma variável nomeada como  `const data`  ( data significa dado, informação), que receberá colchetes e chaves  `[{}]`.
+
+Dentro das chaves, vamos inserir as informações (dados) que serão exibidas no gráfico. Ele terá um eixo  `x`  (  _horizontal_  ) e um eixo  `y`  (  _vertical_  ), além de um  `type`  (  _tipo_  ). Um gráfico sempre receberá essas três informações.
+
+O eixo  `x`  vai receber  `nomeDasRedes`. O eixo  `y`  vai receber  `quantidadeUsuarios`. O  `type`  vai receber  `bar`, afinal, queremos criar um gráfico de barras.
+
+```go
+const data = [
+  {
+    x: nomeDasRedes,
+    y: quantidadeUsuarios,
+    type: 'bar'
+  }
+]
+```
+## Exibindo o gráfico
+
+Para exibir esse gráfico, precisamos inseri-lo dentro da seção  `graficos-container`, que está no arquivo  `index.html`. Faremos isso diretamente pelo JavaScript.
+
+Ainda no arquivo  `quantidadeUsuarios.js`, depois da  `const data`, vamos criar uma variável  `const grafico`  (no singular) que recebe  `document.createElement('div')`.
+
+Logo depois, vamos criar uma classe de CSS para esse gráfico, com  `grafico.className = 'grafico'`.
+
+```javascript
+const grafico = document.createElement('div')
+grafico.className = 'grafico'
+document.getElementById('graficos-container').appendChild(grafico)
+Plotly.newPlot(grafico, data)
+```
+Para acessar esse gráfico no HTML, em  `graficos-container`, podemos escrever  `document.getElementById('graficos-container')`, que é o local onde vamos gerar todos os gráficos, e adicionar  `.appendChild(grafico)`  para inserir o nosso novo gráfico.
+
+Para finalizar, vamos pedir para o  `Plotly`  criar um novo gráfico, usando o método  `.newPlot()`  e passando como parâmetros a estrutura do gráfico e as informação que ele apresentará. Portanto:  `Plotly.newPlot(grafico, data)`.
 
 
 ## Unidade Ciência de dados: criando gráficos dinâmicos com JavaScript
