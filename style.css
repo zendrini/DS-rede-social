@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 :root {
@@ -19,8 +18,9 @@ body {
 h1 {
     font-size: 2rem;
     color: var(--bg-color);
-     font-weight: 700;
+    font-weight: 700;
 }
+
 nav {
     display: flex;
     justify-content: center;
@@ -31,8 +31,8 @@ nav {
 nav a {
     text-decoration: none;
     color: var(--bg-color);
-     margin: 0 2rem 1rem 0rem;
-     font-size: 1.2rem;
+    margin: 0 2rem 1rem 0rem;
+    font-size: 1.2rem;
 }
 
 header {
@@ -57,22 +57,23 @@ footer {
     height: 3rem;
     margin-top: 2rem;
 }
+
 /* Fim codigos aula 03*/
 
 .graficos-container {
     margin: 5rem;
-   }
+}
 
-   .graficos-container__texto {
+.graficos-container__texto {
     font-size: 1.3rem;
     text-align: center;
     padding: 2rem;
     border: var(--secondary-color) solid 2px;
-  }
+}
 
-  span {
+span {
     font-weight: bold;
     color: var(--secondary-color);
-   }
-   /* Fim codigos aula 06*/
+}
 
+/* Fim codigos aula 06*/
