@@ -10,4 +10,3 @@ const tickConfig = {
 }
 
 export { getCSS, tickConfig }
-export { getCSS }
